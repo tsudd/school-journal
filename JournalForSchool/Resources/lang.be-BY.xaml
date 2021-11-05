@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <!-- LoginPage -->
+    <v:String x:Key="journal">Электронны дзённiк</v:String>
+    <v:String x:Key="authorization">Аўтарызацыя</v:String>
+    <v:String x:Key="loginWaterMark">Увядзіце лагiн</v:String>
+    <v:String x:Key="passwordWaterMark">Увядзіце пароль</v:String>
+    <v:String x:Key="login">Лагiн</v:String>
+    <v:String x:Key="password">Пароль</v:String>
+    <v:String x:Key="language">BY</v:String>
+    <v:String x:Key="enter">Увайсці</v:String>
+    <v:String x:Key="registration">Рэгістрацыя</v:String>
+    <v:String x:Key="forgotPassword">Забыліся пароль?</v:String>
+    <!-- SubjectMarks-->
+    <v:String x:Key="journalTable">Часопіс паспяховасці</v:String>
+    <v:String x:Key="class">класа</v:String>
+    <v:String x:Key="back">Назад</v:String>
+    <v:String x:Key="pupilName">Прозвішча, імя, імя па бацьку вучня</v:String>
+    <v:String x:Key="monday">панядзелак</v:String>
+    <v:String x:Key="tuesday">аўторак</v:String>
+    <v:String x:Key="wednesday">сераду</v:String>
+    <v:String x:Key="thursday">чацвер</v:String>
+    <v:String x:Key="friday">пятніцу</v:String>
+</ResourceDictionary>

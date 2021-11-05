@@ -1,0 +1,53 @@
+﻿<Page x:Class="JournalForSchool.AdminPageFolder.AdminTimetableEditing"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:JournalForSchool.AdminPageFolder"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AdminTimetableEditing">
+
+    <Grid>
+
+        <Label Content="Изменение расписания" HorizontalAlignment="Left" Height="37" FontSize="20" FontWeight="Bold" Margin="10,30,0,0" VerticalAlignment="Top" Width="632"/>
+
+        <ListBox Name="TimeTable" Height="193" VerticalAlignment="Top" HorizontalAlignment="Left" Width="520" Margin="10,208,0,0" SelectionChanged="Events_SelectionChanged">
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="Bold" Width="25"></TextBlock>
+                <TextBlock FontWeight="Bold" Width="120">Время</TextBlock>
+                <TextBlock FontWeight="Bold" Width="150">Урок</TextBlock>
+                <TextBlock FontWeight="Bold">Учитель</TextBlock>
+            </StackPanel>
+
+        </ListBox>
+
+        <Button Name="Monday_Button"  Style="{StaticResource CustomButtonStyle}"  Content="Понедельник" HorizontalAlignment="Left" Height="25" Margin="535,208,0,0" VerticalAlignment="Top" Width="107" Click="Monday_Button_Click"/>
+        <Button Name="Tuesday_Button"  Style="{StaticResource CustomButtonStyle}"  Content="Вторник" HorizontalAlignment="Left" Height="25" Margin="535,254,0,0" VerticalAlignment="Top" Width="107" Click="Tuesday_Button_Click"/>
+        <Button Name="Wednesday_Button" Style="{StaticResource CustomButtonStyle}" Content="Среда" HorizontalAlignment="Left" Height="25" Margin="535,294,0,0" VerticalAlignment="Top" Width="107" Click="Wednesday_Button_Click"/>
+        <Button Name="Thursday_Button" Style="{StaticResource CustomButtonStyle}" Content="Четверг" HorizontalAlignment="Left" Height="25" Margin="535,335,0,0" VerticalAlignment="Top" Width="107" RenderTransformOrigin="0.472,-0.719" Click="Thursday_Button_Click"/>
+        <Button Name="Friday_Button" Style="{StaticResource CustomButtonStyle}" Content="Пятница" HorizontalAlignment="Left" Height="25" Margin="535,376,0,0" VerticalAlignment="Top" Width="107" Click="Friday_Button_Click"/>
+
+        <Label Content="Класс" HorizontalAlignment="Left" Margin="16,92,0,0" VerticalAlignment="Top" Height="28" Width="96"/>
+        <Label Content="Буква" HorizontalAlignment="Left" Margin="16,148,0,0" VerticalAlignment="Top" Height="28" Width="96"/>
+        <ComboBox Name="The_class_name" HorizontalAlignment="Left" Height="23" Margin="16,120,0,0" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.495,0.983" SelectedIndex="0" SelectionChanged="The_class_name_SelectionChanged"/>
+        <ComboBox Name="The_class_letter" HorizontalAlignment="Left" Height="23" Margin="16,176,0,0" VerticalAlignment="Top" Width="37" SelectedIndex="0" RenderTransformOrigin="0.046,0.19" SelectionChanged="The_class_letter_SelectionChanged"/>
+
+        <Label Content="Id" HorizontalAlignment="Left" Margin="179,97,0,0" VerticalAlignment="Top" Height="23" Width="96"/>
+        <TextBox Name="Id_Box" Text="" HorizontalAlignment="Left" Height="23" Margin="179,120,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="40"/>
+
+        <Button Name="Back" Content="Назад" HorizontalAlignment="Left" Margin="664,335,0,0" VerticalAlignment="Top" Width="104" Height="25" Click="Back_Click"/>
+
+        <Button Name="Delete" Content="Удалить" HorizontalAlignment="Left" Height="28" Margin="179,157,0,0" VerticalAlignment="Top" Width="62" Click="Delete_Click"/>
+        <ComboBox Name="Subject_delete" SelectedIndex="0" HorizontalAlignment="Left" Margin="298,120,0,0" VerticalAlignment="Top" Width="116"/>
+        <ComboBox Name="Teacher_delete" SelectedIndex="0" HorizontalAlignment="Left" Margin="432,120,0,0" VerticalAlignment="Top" Width="140"/>
+        
+        <Button Name="Add" Content="Добавить" HorizontalAlignment="Left" Height="28" Margin="432,157,0,0" VerticalAlignment="Top" Width="81" Click="Add_Click"/>
+
+        <Label Content="Предмет" HorizontalAlignment="Left" Margin="298,92,0,0" VerticalAlignment="Top" Height="28"/>
+        <Label Content="Учитель" HorizontalAlignment="Left" Margin="432,93,0,0" VerticalAlignment="Top" Height="27"/>
+
+
+    </Grid>
+</Page>

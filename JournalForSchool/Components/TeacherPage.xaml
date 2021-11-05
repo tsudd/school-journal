@@ -1,0 +1,48 @@
+﻿<Page x:Class="JournalForSchool.TeacherPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:JournalForSchool"
+      mc:Ignorable="d" d:DesignWidth="800"
+      Title="TeacherPage" Height="429.815">
+
+    <Grid Margin="0,0,0,28.6">
+
+        <Label Content="Учитель:" HorizontalAlignment="Left" Height="37" FontSize="20" FontWeight="Bold" Margin="153,30,0,0" VerticalAlignment="Top" Width="99"/>
+        <Label Name="TeacherName" Content="имя" HorizontalAlignment="Left" Height="37" FontSize="20" Margin="257,30,-71,0" VerticalAlignment="Top" Width="614"/>
+
+        <Label Content="Специализация:" HorizontalAlignment="Left" Height="37" FontSize="20" FontWeight="Bold" Margin="153,72,0,0" VerticalAlignment="Top" Width="173" RenderTransformOrigin="0.539,2.049"/>
+        <Label Name="Specialization" Content="Язык и литераутра" HorizontalAlignment="Left" Height="37" FontSize="20" Margin="331,72,-71,0" VerticalAlignment="Top" Width="540"/>
+
+        <Label Content="Моб тел:" HorizontalAlignment="Left" Height="37" FontSize="20" FontWeight="Bold" Margin="153,114,0,0" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.539,2.049"/>
+        <Label Name="Phone"  HorizontalAlignment="Left" Height="37" FontSize="20" Margin="265,114,0,0" VerticalAlignment="Top" Width="310"/>
+        <Label Content="Расписание:" HorizontalAlignment="Left" Height="37" FontSize="20" FontWeight="Bold" Margin="36,156,0,0" VerticalAlignment="Top" Width="173" RenderTransformOrigin="0.539,2.049"/>
+
+        <ListBox Name="TimeTable" Height="202" VerticalAlignment="Top" HorizontalAlignment="Left" Width="414" Margin="36,198,0,0" SelectionChanged="Events_SelectionChanged">
+
+            <StackPanel Orientation="Horizontal">   
+                <TextBlock FontWeight="Bold" Width="25"></TextBlock>
+                <TextBlock FontWeight="Bold" Width="100">Время</TextBlock>
+                <TextBlock FontWeight="Bold" Width="65">Класс</TextBlock>
+                <TextBlock FontWeight="Bold" Width="130">Предмет</TextBlock>
+                <TextBlock FontWeight="Bold" Width="120">Кабинет</TextBlock>
+            </StackPanel>
+
+        </ListBox>
+
+        <Button Name="Back" Content="Назад" HorizontalAlignment="Left" Height="32" Margin="592,368,0,0" VerticalAlignment="Top" Width="119" Click="Back_Click"/>
+
+        <Button Name="Monday_Button" Content="Понедельник" HorizontalAlignment="Left" Height="25" Margin="455,198,0,0" VerticalAlignment="Top" Width="107" Click="Monday_Button_Click"/>
+        <Button Name="Tuesday_Button" Content="Вторник" HorizontalAlignment="Left" Height="25" Margin="455,243,0,0" VerticalAlignment="Top" Width="107" Click="Tuesday_Button_Click"/>
+        <Button Name="Wednesday_Button" Content="Среда" HorizontalAlignment="Left" Height="25" Margin="455,289,0,0" VerticalAlignment="Top" Width="107" Click="Wednesday_Button_Click"/>
+        <Button Name="Thursday_Button" Content="Четверг" HorizontalAlignment="Left" Height="25" Margin="455,332,0,0" VerticalAlignment="Top" Width="107" RenderTransformOrigin="0.472,-0.719" Click="Thursday_Button_Click"/>
+        <Button Name="Friday_Button" Content="Пятница" HorizontalAlignment="Left" Height="25" Margin="455,376,0,0" VerticalAlignment="Top" Width="107" Click="Friday_Button_Click" RenderTransformOrigin="-0.103,0.874"/>
+        <Button x:Name="Edit_Button" Content="Редактировать" HorizontalAlignment="Left" Height="26" Margin="598,156,0,0" VerticalAlignment="Top" Width="113" Click="Edit_Button_Click"/>
+
+        <Image Name="imgPicture" HorizontalAlignment="Left" Height="111" Margin="10,15,0,0" VerticalAlignment="Top" Width="134"/>
+        <Button Name="Upload_image" Content="Загрузить" HorizontalAlignment="Left" Margin="10,136,0,0" VerticalAlignment="Top" Width="88" Height="20" Click="Upload_image_Click"/>
+
+
+    </Grid>
+</Page>
