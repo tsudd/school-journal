@@ -1,13 +1,8 @@
-﻿using JournalForSchool.Database_Source;
-using JournalForSchool.Models;
-using Renci.SshNet.Messages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using DataAccessLayer.Models;
 
 namespace JournalForSchool
 {

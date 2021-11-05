@@ -1,8 +1,7 @@
-﻿using JournalForSchool.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
+using DataAccessLayer.Models;
 
 namespace JournalForSchool.Database_Source
 {

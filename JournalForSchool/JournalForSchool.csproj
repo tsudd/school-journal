@@ -17,6 +17,21 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,8 +60,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <WarningLevel>2</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -179,7 +195,6 @@
     <Compile Include="Database_Source\TimeTableInteraction.cs" />
     <Compile Include="Database_Source\UsersInteraction.cs" />
     <Compile Include="Login\PasswordBoxMonitor.cs" />
-    <Compile Include="Models\Admin.cs" />
     <Compile Include="Database\AdminsRepository.cs" />
     <Compile Include="Database\IRepository.cs" />
     <Compile Include="Login\LoginPage.xaml.cs">
@@ -188,12 +203,6 @@
     <Compile Include="Login\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Mark.cs" />
-    <Compile Include="Models\Subjects.cs" />
-    <Compile Include="Models\Teacher.cs" />
-    <Compile Include="Models\TheClasses.cs" />
-    <Compile Include="Models\Timetable.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Database\MarksRepository.cs" />
     <Compile Include="Database\UnitOfWork.cs" />
     <Compile Include="Database\SubjectsRepository.cs" />
@@ -346,6 +355,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\NoPhoto.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccessLayer.csproj">
+      <Project>{00c2d5b3-a567-425a-87c1-a522deec5e57}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

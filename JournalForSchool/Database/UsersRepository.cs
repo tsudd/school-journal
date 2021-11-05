@@ -1,11 +1,7 @@
-﻿using JournalForSchool.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using DataAccessLayer.Models;
 namespace JournalForSchool
 {
     public class UsersRepository : IRepository<User>

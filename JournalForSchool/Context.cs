@@ -1,8 +1,5 @@
-﻿using System;
-using System.Data.Entity;
-using System.Windows;
-using JournalForSchool.Models;
-using Renci.SshNet.Messages;
+﻿using System.Data.Entity;
+using DataAccessLayer.Models;
 
 namespace JournalForSchool
 {

@@ -1,12 +1,8 @@
-﻿using JournalForSchool.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls.Primitives;
+using DataAccessLayer.Models;
 
 namespace JournalForSchool
 {
@@ -19,7 +15,6 @@ namespace JournalForSchool
         {
             unitOfWork = UnitOfWork.GetInstance();
             this.db = unitOfWork.Db;
-            
         }
 
         public IEnumerable<TheClasses> GetAll()

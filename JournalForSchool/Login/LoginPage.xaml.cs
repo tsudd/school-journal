@@ -1,16 +1,9 @@
 ﻿using JournalForSchool.Components;
 using JournalForSchool.Database_Source;
 using JournalForSchool.Login;
-using JournalForSchool.Models;
-using System;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Security.Cryptography;
-using System.Security.Policy;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using DataAccessLayer.Models;
 
 namespace JournalForSchool
 {

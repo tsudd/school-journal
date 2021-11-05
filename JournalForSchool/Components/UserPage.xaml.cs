@@ -1,15 +1,12 @@
 ﻿using JournalForSchool.Components;
 using JournalForSchool.Database_Source;
-using JournalForSchool.Models;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using DataAccessLayer.Models;
 
 namespace JournalForSchool
 {

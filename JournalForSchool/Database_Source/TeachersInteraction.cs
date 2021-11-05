@@ -1,12 +1,5 @@
-﻿using JournalForSchool.Models;
-using System;
-using System.Collections.Generic;
+﻿using DataAccessLayer.Models;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Markup;
 
 namespace JournalForSchool.Database_Source
 {
