@@ -1,7 +1,7 @@
 ﻿using DataAccessLayer.DataAccessModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SchoolJournalUnit
+namespace TestSchoolJournal
 {
     [TestClass]
     public class TestUserProcs

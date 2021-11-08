@@ -1,78 +1,76 @@
 ﻿using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace DataAccessLayer.DataAccessModel
 {
-    class DataAccessAdmin : IDataAccess<Admin>
+    public class DataAccessAdmin : IDataAccess<Admin>
     {
-        //private Context db;
+        public const string GET_ALL_PROC = "sp_GetAllAdmins";
+        public const string GET_BY_ID_PROC = "sp_GetAdminById";
+        public const string CREATE_PROC = "sp_CreateAdmin";
+        public const string UPDATE_PROC = "sp_UpdateAdmin";
+        public const string DELETE_PROC = "sp_DeleteAdmin";
 
-        //public AdminsRepository(Context context)
-        //{
-        //    this.db = context;
-        //}
+        public const string ID_ARGUMENT = "id";
+        public const string USERID_ARGUMENT = "userId";
 
-        //public IEnumerable<Admin> GetAll()
-        //{
-        //    return db.Admins;
-        //}
-
-        //public Admin Get(int id)
-        //{
-        //    return db.Admins.Find(id);
-        //}
-
-        //public void Create(Admin admin)
-        //{
-        //    db.Admins.Add(admin);
-        //}
-
-        //public void Update(Admin admin)
-        //{
-        //    db.Entry(admin).State = EntityState.Modified;
-        //}
-
-        //public void Delete(int id)
-        //{
-        //    Admin admin = db.Admins.Find(id);
-        //    if (admin != null)
-        //        db.Admins.Remove(admin);
-        //}
-        //public DbConnection DbConnection => throw new NotImplementedException();
-
-        //DbConnection Connection => throw new NotImplementedException();
         Db Connection;
 
-        public DataAccessAdmin(String connectionString)
+        public DataAccessAdmin()
         {
             Connection = Db.GetInstance();
         }
 
+
+
         public void Create(Admin item)
         {
-            throw new NotImplementedException();
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter(USERID_ARGUMENT, item.UserId)
+            };
+            Connection.ExecuteCommand<Admin>(CREATE_PROC, parameters, false);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter(ID_ARGUMENT, id)
+            };
+            Connection.ExecuteCommand<Admin>(DELETE_PROC, parameters, false);   
         }
 
         public Admin Get(int id)
         {
-            throw new NotImplementedException();
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter(ID_ARGUMENT, id)
+            };
+            var admins = Connection.ExecuteCommand<Admin>(GET_BY_ID_PROC, parameters);
+            if (admins.Count > 0)
+            {
+                return admins[0];
+            }
+            return null;
         }
 
         public IEnumerable<Admin> GetAll()
         {
-            throw new NotImplementedException();
+            return Connection.ExecuteCommand<Admin>(GET_ALL_PROC);
         }
 
         public void Update(Admin item)
         {
-            throw new NotImplementedException();
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter(ID_ARGUMENT, item.Id),
+                new SqlParameter(USERID_ARGUMENT, item.UserId)
+            };
+            Connection.ExecuteCommand<Admin>(UPDATE_PROC, parameters, false);
         }
     }
 }

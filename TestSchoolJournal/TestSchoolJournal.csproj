@@ -49,6 +49,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestAdminProcs.cs" />
+    <Compile Include="TestClassAccess.cs" />
     <Compile Include="TestUserProcs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

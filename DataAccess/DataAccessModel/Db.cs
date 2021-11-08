@@ -16,6 +16,7 @@ namespace DataAccessLayer
         private bool disposed = false;
         public static Db GetInstance()
         {
+            // TODO: make configuration system
             if (instance == null)
             {
                 instance = new Db("Data Source=WIN-M0F5PG83R5T;Initial Catalog=JournalForSchool;Integrated Security=True");
@@ -33,7 +34,7 @@ namespace DataAccessLayer
             }
         }
 
-        public List<TModel> ExecuteCommand<TModel>(string storedProcedureName, SqlParameterCollection sqlParameters = null, bool execRead = true) where TModel : new()
+        public List<TModel> ExecuteCommand<TModel>(string storedProcedureName, List<SqlParameter> sqlParameters = null, bool execRead = true) where TModel : new()
         {
             var modelType = typeof(TModel);
             var modelFields = modelType.GetProperties();
@@ -82,15 +83,15 @@ namespace DataAccessLayer
                     } 
                     else
                     {
-                        _ = command.ExecuteScalar();
+                        command.ExecuteNonQuery();
                         response = null;
                     }
                     return response;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception("invalid model or command");
+                throw new ArgumentException($"{storedProcedureName}:Wrong procedure arguemnt or execution format: {ex.Message}");
             }
         }
 

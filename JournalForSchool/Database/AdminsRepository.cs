@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using DataAccessLayer.Models;
 
-namespace JournalForSchool.Repositories
+namespace JournalForSchool
 {
     public class AdminsRepository : IRepository<Admin>
     {
