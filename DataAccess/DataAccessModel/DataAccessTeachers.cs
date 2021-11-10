@@ -83,51 +83,15 @@ namespace DataAccessLayer.DataAccessModel
 
         public List<string> GetAllTeachersNames()
         {
-            return null;
-        }
-        /*         
-         public IEnumerable<Teacher> GetAll()
-        {
-            return db.Teachers;
-        }
-
-        public Teacher Get(int id)
-        {
-            return db.Teachers.Find(id);
-        }
-
-        public void Create(Teacher teacher)
-        {
-            db.Teachers.Add(teacher);
-        }
-
-        public void Update(Teacher teacher)
-        {
-            db.Entry(teacher).State = EntityState.Modified;
-        }
-
-        public void Delete(int id)
-        {
-            Teacher teacher = db.Teachers.Find(id);
-            if (teacher != null)
-                db.Teachers.Remove(teacher);
-        }
-
-        public List<string> GetAllTeachersNames()
-        {
-            List<string> listNames = new List<string>();
-            UnitOfWork unitOfWork = UnitOfWork.GetInstance();
-            
-            var allTeachers = db.Teachers.ToList();
-
-            foreach (var item in allTeachers)
+            var users = new DataAccessUsers();
+            List<string> response = new List<string>();
+            foreach(var teacher in GetAll())
             {
-                var user = unitOfWork.Users.GetUserById(item.UserId);
-                listNames.Add(user.LastName + " " + user.FirstName + " " + user.MiddleName);
+                var user = users.Get(teacher.UserId);
+                response.Add(user.LastName + " " + user.FirstName + " " + user.MiddleName);
             }
-
-            return listNames;
+            return response;
         }
-        */
+        
     }
 }

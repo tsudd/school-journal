@@ -1,7 +1,7 @@
 ﻿using DataAccessLayer.DataAccessModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataAccessLayer.Models;
-
+using System;
 namespace TestSchoolJournal
 {
     [TestClass]
@@ -34,7 +34,16 @@ namespace TestSchoolJournal
             teacher.SubjectId = 9;
             teachers.Update(teacher);*/
 
-            teachers.Delete(10);
+            //teachers.Delete(10);
+
+            /*var response = teachers.GetAllTeachersNames();
+            int i = 0;
+            foreach (var item in response)
+            {
+                i++;
+                Assert.AreEqual(item, ""); //krinzh
+            }*/
+
         }
     }
 }
