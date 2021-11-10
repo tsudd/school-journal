@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="TestAdminProcs.cs" />
     <Compile Include="TestClassAccess.cs" />
+    <Compile Include="TestMarkProcs.cs" />
     <Compile Include="TestUserProcs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

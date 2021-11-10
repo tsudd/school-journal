@@ -76,27 +76,27 @@ namespace TestSchoolJournal
         [TestMethod]
         public void TestAdminCreation()
         {
-            ////given
-            //var admin = new Admin() { UserId = 1 };
+            //given
+            var admin = new Admin() { UserId = 1 };
 
-            ////when
-            //try
-            //{
-            //    //then
-            //    AdminsAccess.Create(admin);
-            //}
-            //catch
-            //{
-            //    Assert.Fail();
-            //}
+            //when
+            try
+            {
+                //then
+                AdminsAccess.Create(admin);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
         public void TestUpdateAdmin()
         {
             //given
-            var admin = new Admin() {Id = 2, UserId = 2023 };
-
+            var admin = new Admin() {Id = 1, UserId = 2023 };
+    
             //when
             try
             {

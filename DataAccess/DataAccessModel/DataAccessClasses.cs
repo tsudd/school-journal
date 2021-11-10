@@ -18,7 +18,8 @@ namespace DataAccessLayer.DataAccessModel
 
         public const string ID_ARGUMENT = "id";
         public const string USERID_ARGUMENT = "userId";
-        public const string CLASS_AGRUMENT = "theClass";
+        public const string CLASS_ARGUMENT = "theClass";
+        public const string CHECKTABLE_ARGUMENT = "checkTimetableId";
         public const string LETTER_ARGUMENT = "classLetter";
 
         Db Connection;
@@ -30,12 +31,21 @@ namespace DataAccessLayer.DataAccessModel
 
         public void Create(TheClasses item)
         {
-            throw new NotImplementedException();
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter(CLASS_ARGUMENT, item.TheClass),
+                new SqlParameter(LETTER_ARGUMENT, item.ClassLetter)
+            };
+            Connection.ExecuteCommand<Mark>(CREATE_PROC, parameters, false);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter(ID_ARGUMENT, id)
+            };
+            Connection.ExecuteCommand<Admin>(DELETE_PROC, parameters, false);
         }
 
         public TheClasses Get(int id)
@@ -61,7 +71,7 @@ namespace DataAccessLayer.DataAccessModel
         {
             var parameters = new List<SqlParameter>
             {
-                new SqlParameter(CLASS_AGRUMENT, item.TheClass),
+                new SqlParameter(CHECKTABLE_ARGUMENT, item.TheClass),
                 new SqlParameter(LETTER_ARGUMENT, item.ClassLetter)
             };
             Connection.ExecuteCommand<TheClasses>(UPDATE_PROC, parameters, false);
@@ -82,7 +92,7 @@ namespace DataAccessLayer.DataAccessModel
         {
             var parameters = new List<SqlParameter>
             {
-                new SqlParameter(CLASS_AGRUMENT, item.TheClass),
+                new SqlParameter(CHECKTABLE_ARGUMENT, item.TheClass),
                 new SqlParameter(LETTER_ARGUMENT, item.ClassLetter)
             };
             var classes = Connection.ExecuteCommand<TheClasses>(GET_CLASS_BY_NUMBER, parameters);
