@@ -87,3 +87,12 @@ DROP PROCEDURE
 	dbo.sp_CheckIfFieldsAreCorrect_TimetablesProc,
 	dbo.sp_CheckForeignRefsAreCorrect_TimetablesProc;	
 GO
+
+-- drop Additional procedures.
+DROP PROCEDURE
+	sp_GetTheDisctinctClassesNames,
+	sp_GetAdminByUserId,
+	sp_GetTeacherByUserId,
+	sp_GetTimetableForUser,
+	sp_GetAllPupilsAndUpdate;	
+GO

@@ -147,7 +147,7 @@ GO
 -- 7) DeleteIfExist_MarksProc. +
 -- exec sp_DeleteIfExist_MarksProc @userId=2, @timeTableId=3, @date='Test_date_2';
 
--- #6 Timetables *****************************************************************
+-- #7 Timetables *****************************************************************
 
 -- 1) get All. +
 -- exec sp_GetAllTimetables;
@@ -163,3 +163,24 @@ GO
 
 -- 5) delete One. +
 -- exec sp_DeleteTimetable @id=7;
+
+
+-- #7 Additional *****************************************************************
+
+-- 1) GetTheDisctinctClassesNames. +			* p.s.Returns Distinct Classes Numbers in DESC order
+-- exec sp_GetTheDisctinctClassesNames;
+
+-- 2) GetAdminByUserId. +
+-- exec sp_GetAdminByUserId @userId=8;
+
+-- 3) GetTeacherByUserId. +
+-- exec sp_GetTeacherByUserId @userId=1010;
+
+-- 4) GetTimetableForUser. +
+-- exec sp_GetTimetableForUser @day='Monday', @classId=2, @lessonNumber=2;
+
+-- 5) GetAllPupilsAndUpdate. +
+-- exec sp_GetAllPupilsAndUpdate;
+
+-- 6) GetAllTeachersAndUpdate.
+-- юзать sp_GetAllTeachers !
