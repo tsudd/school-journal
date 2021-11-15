@@ -15,6 +15,9 @@ namespace DataAccessLayer.DataAccessModel
         public const string DELETE_PROC = "sp_DeleteTimetable";
         public const string GET_ALL_PROC = "sp_GetAllTimetables";
         public const string GET_BY_ID_PROC = "sp_GetTimetableById";
+        public const string GET_TIMETABLE_FOR_USER_PROC = "sp_GetTimetableForUser";
+        public const string GET_TIMETABLE_FOR_TEACHER_PROC = "sp_GetTimetableForTeacher";
+        public const string GET_TIMETABLE_MODEL_PROC = "sp_GetTimeTableModel";
 
         public const string ID_ARGUMENT = "id";
         public const string LESSON_NUMBER_ARGUMENT = "lessonNumber";
@@ -26,6 +29,7 @@ namespace DataAccessLayer.DataAccessModel
         public const string WEDNESDAY_ARGUMENT = "wednesday";
         public const string THURSDAY_ARGUMENT = "thursday";
         public const string FRIDAY_ARGUMENT = "friday";
+        public const string DAY_ARGUMENT = "day";
 
         public DataAccessTimetables()
         {
@@ -96,6 +100,54 @@ namespace DataAccessLayer.DataAccessModel
                 new SqlParameter(FRIDAY_ARGUMENT, item.Friday)
             };
             Connection.ExecuteCommand<Admin>(UPDATE_PROC, parameters, false);
+        }
+
+        public Timetable GetTimetableForUser(string day, int classId, int lessonNum)
+        {
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter(DAY_ARGUMENT, day),
+                new SqlParameter(CLASS_ID_ARGUMENT, classId),
+                new SqlParameter(LESSON_NUMBER_ARGUMENT, lessonNum)
+            };
+            var timetables = Connection.ExecuteCommand<Timetable>(GET_TIMETABLE_FOR_USER_PROC, parameters);
+            if (timetables.Count > 0)
+            {
+                return timetables[0];
+            }
+            return null;
+        }
+
+        public Timetable GetTimetableForTeacher(string day, int teacherId, int lessonNum)
+        {
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter(DAY_ARGUMENT, day),
+                new SqlParameter(TEACHER_ID_ARGUMENT, teacherId),
+                new SqlParameter(LESSON_NUMBER_ARGUMENT, lessonNum)
+            };
+            var timetables = Connection.ExecuteCommand<Timetable>(GET_TIMETABLE_FOR_TEACHER_PROC, parameters);
+            if (timetables.Count > 0)
+            {
+                return timetables[0];
+            }
+            return null;
+        }
+
+        public Timetable GetTimetableModel(int subjectId, int lessonNum, int classId)
+        {
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter(SUBJECT_ID_ARGUMENT, subjectId),
+                new SqlParameter(CLASS_ID_ARGUMENT, classId),
+                new SqlParameter(LESSON_NUMBER_ARGUMENT, lessonNum)
+            };
+            var timetables = Connection.ExecuteCommand<Timetable>(GET_TIMETABLE_MODEL_PROC, parameters);
+            if (timetables.Count > 0)
+            {
+                return timetables[0];
+            }
+            return null;
         }
     }
 }

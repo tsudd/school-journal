@@ -19,8 +19,8 @@ namespace DataAccessLayer
             // TODO: make configuration system
             if (instance == null)
             {
-                //instance = new Db("Data Source=WIN-M0F5PG83R5T;Initial Catalog=JournalForSchool;Integrated Security=True");
-                instance = new Db("Data Source=DESKTOP-6877KEL;Initial Catalog=JournalForSchool;Integrated Security=True;User Id = sa; Password = sa");
+                instance = new Db("Data Source=WIN-M0F5PG83R5T;Initial Catalog=JournalForSchool;Integrated Security=True");
+                //instance = new Db("Data Source=DESKTOP-6877KEL;Initial Catalog=JournalForSchool;Integrated Security=True;User Id = sa; Password = sa");
             }
             return instance;
         }

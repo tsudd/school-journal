@@ -2,62 +2,62 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using DataAccessLayer.DataAccessModel;
 using DataAccessLayer.Models;
 
 namespace JournalForSchool
 {
     public class SubjectsRepository : IRepository<Subjects>
     {
-        private UnitOfWork unitOfWork;
+        private readonly DataAccessSubjects dataAccess;
 
-        public SubjectsRepository()
+        public SubjectsRepository(AccessOrchestrator orchestrator = null)
         {
-            unitOfWork = UnitOfWork.GetInstance();
+            if (orchestrator == null)
+            {
+                throw new ArgumentException();
+            }
+            dataAccess = orchestrator.GetModelAccess<Subjects>() as DataAccessSubjects;
         }
 
         public IEnumerable<Subjects> GetAll()
         {
-            return unitOfWork.Db.Subjects;
+            return dataAccess.GetAll();
         }
 
         public Subjects Get(int id)
         {
-            return unitOfWork.Db.Subjects.Find(id);
+            return dataAccess.Get(id);
         }
 
         public void Create(Subjects subject)
         {
-            unitOfWork.Db.Subjects.Add(subject);
+            dataAccess.Create(subject);
         }
 
         public void Update(Subjects subject)
         {
-            unitOfWork.Db.Entry(subject).State = EntityState.Modified;
+            dataAccess.Update(subject);
         }
 
         public void Delete(int id)
         {
-            Subjects subject = unitOfWork.Db.Subjects.Find(id);
-            if (subject != null)
-                unitOfWork.Db.Subjects.Remove(subject);
+            dataAccess.Delete(id);
         }
 
         public List<string> GetSubjectsList()
         {
-            var list = unitOfWork.Db.Subjects.Select(item => item.SubjectName);
-            return list.ToList();
+            return dataAccess.GetSubjectNames();
         }
 
         public string GetSubjectName(int subject_id)
         {
-            Subjects subject = unitOfWork.Db.Subjects.FirstOrDefault(item => item.Id == subject_id);
-            return subject.SubjectName;
+            return dataAccess.GetSubjectName(subject_id);
         }
 
         public int GetSubjectId(string subject_name)
         {
-            Subjects subject = unitOfWork.Db.Subjects.FirstOrDefault(item => item.SubjectName == subject_name);
-            return subject.Id;
+            return dataAccess.GetSubjectIdByName(subject_name);
         }
     }
 }

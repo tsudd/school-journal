@@ -231,7 +231,7 @@ namespace JournalForSchool.AdminPageFolder
             string subjectNew = (string)Subject_delete.Text;
             int teacherId = 0;
 
-            var allTeachers = unitOfWork.Db.Teachers.ToList();
+            var allTeachers = unitOfWork.Teachers.GetAll();
             
             foreach (var item in allTeachers)
             {

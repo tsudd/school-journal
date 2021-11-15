@@ -1,47 +1,63 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using DataAccessLayer.DataAccessModel;
 using DataAccessLayer.Models;
 
 namespace JournalForSchool
 {
     public class TimetableRepository : IRepository<Timetable>
     {
-        private Context db;
+        private readonly DataAccessTimetables dataAccess; 
 
-        public TimetableRepository(Context context)
+        public TimetableRepository(AccessOrchestrator orchestrator = null)
         {
-            this.db = context;
+            if (orchestrator == null)
+            {
+                throw new ArgumentException();
+            }
+            dataAccess = orchestrator.GetModelAccess<Timetable>() as DataAccessTimetables;
         }
 
         public IEnumerable<Timetable> GetAll()
         {
-            return db.Timetable;
+            return dataAccess.GetAll();
         }
 
         public Timetable Get(int id)
         {
-            return db.Timetable.Find(id);
+            return dataAccess.Get(id);
         }
 
         public void Create(Timetable timetable)
         {
-            db.Timetable.Add(timetable);
+            dataAccess.Create(timetable);
         }
 
         public void Update(Timetable timetable)
         {
-            db.Entry(timetable).State = EntityState.Modified;
+            dataAccess.Update(timetable);
         }
 
         public void Delete(int id)
         {
-            Timetable timetable = db.Timetable.FirstOrDefault(item => item.Id == id);
-            if (timetable != null)
-            {
-                db.Timetable.Remove(timetable);
-                db.SaveChanges();
-            }
+            dataAccess.Delete(id);
+        }
+
+        public Timetable GetTimetableForUser(string day, int classId, int lessonNum)
+        {
+            return dataAccess.GetTimetableForUser(day, classId, lessonNum);
+        }
+
+        public Timetable GetTimetableForTeacher(string day, int teacherId, int lessonNum)
+        {
+            return dataAccess.GetTimetableForTeacher(day, teacherId, lessonNum);
+        }
+
+        public Timetable GetTimetableModel(int subjectId, int lessonNum, int classId)
+        {
+            return dataAccess.GetTimetableModel(subjectId, lessonNum, classId);
         }
     }
 }

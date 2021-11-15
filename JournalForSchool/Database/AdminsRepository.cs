@@ -1,44 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using DataAccessLayer.DataAccessModel;
 using DataAccessLayer.Models;
 
 namespace JournalForSchool
 {
     public class AdminsRepository : IRepository<Admin>
     {
-        private Context db;
+        private readonly DataAccessAdmin dataAccess;
 
-        public AdminsRepository(Context context)
+        public AdminsRepository(AccessOrchestrator orchestrator = null)
         {
-            this.db = context;
+            if (orchestrator == null)
+            {
+                throw new ArgumentException();
+            }
+            dataAccess = orchestrator.GetModelAccess<Admin>() as DataAccessAdmin;
         }
 
         public IEnumerable<Admin> GetAll()
         {
-            return db.Admins;
+            return dataAccess.GetAll();
         }
 
         public Admin Get(int id)
         {
-            return db.Admins.Find(id);
+            return dataAccess.Get(id);
         }
 
         public void Create(Admin admin)
         {
-            db.Admins.Add(admin);
+            dataAccess.Create(admin);
         }
 
         public void Update(Admin admin)
         {
-            db.Entry(admin).State = EntityState.Modified;
+            dataAccess.Update(admin);
         }
 
         public void Delete(int id)
         {
-            Admin admin = db.Admins.Find(id);
-            if (admin != null)
-                db.Admins.Remove(admin);
+            dataAccess.Delete(id);
+        }
+
+        public Admin GetAdminByUserId(int id)
+        {
+            return dataAccess.GetAdminByUserId(id);
         }
     }
 }

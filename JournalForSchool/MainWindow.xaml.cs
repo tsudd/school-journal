@@ -11,7 +11,6 @@ namespace JournalForSchool
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Context db;
         public User user;
         public UnitOfWork unitOfWork;
 

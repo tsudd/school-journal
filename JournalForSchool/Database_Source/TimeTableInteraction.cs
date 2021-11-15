@@ -67,58 +67,16 @@ namespace JournalForSchool.Database_Source
         public static Timetable GetTimeTableForUser(string day, int class_id, int lesson_number)
         {
             var unitOfWork = UnitOfWork.GetInstance();
-            
-            Timetable timetable = null;
 
-            switch (day)
-            {
-                case "Monday":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.ClassId == class_id &&
-                                                                        item.Monday == true);
-                    break;
-
-                case "Tuesday":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.ClassId == class_id &&
-                                                                        item.Tuesday == true);
-                    break;
-
-                case "Wednesday":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.ClassId == class_id &&
-                                                                        item.Wednesday == true);
-                    break;
-
-                case "Thursday":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.ClassId == class_id &&
-                                                                        item.Thursday == true);
-                    break;
-
-                case "Friday":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.ClassId == class_id &&
-                                                                        item.Friday == true);
-                    break;
-                case "Default":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.ClassId == class_id &&
-                                                                        item.Monday == true);
-                    break;
-            }
-
+            Timetable timetable = unitOfWork.Timetable.GetTimetableForUser(day, class_id, lesson_number);
+            if (timetable == null) return null;
             return timetable;
         }
 
         public static Timetable GetTimeTableModel(int LessonNumber, int SubjectId, int ClassId) {
 
             var unitOfWork = UnitOfWork.GetInstance();
-            Timetable timeTableModel = unitOfWork.Db.Timetable.First(item => item.LessonNumber == LessonNumber &&
-                                                                            item.SubjectId == SubjectId &&
-                                                                            item.ClassId == ClassId);
-
-            return timeTableModel;
+            return unitOfWork.Timetable.GetTimetableModel(SubjectId, LessonNumber, ClassId);
             
         }
 
@@ -178,45 +136,7 @@ namespace JournalForSchool.Database_Source
         {
             var unitOfWork = UnitOfWork.GetInstance();
 
-            Timetable timetable = null;
-
-            switch (day)
-            {
-                case "Monday":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.TeacherId == teacher_id &&
-                                                                        item.Monday == true);
-                    break;
-
-                case "Tuesday":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.TeacherId == teacher_id &&
-                                                                        item.Tuesday == true);
-                    break;
-
-                case "Wednesday":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.TeacherId == teacher_id &&
-                                                                        item.Wednesday == true);
-                    break;
-
-                case "Thursday":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.TeacherId == teacher_id &&
-                                                                        item.Thursday == true);
-                    break;
-
-                case "Friday":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.TeacherId == teacher_id &&
-                                                                        item.Friday == true);
-                    break;
-                case "Defautlt":
-                    timetable = unitOfWork.Db.Timetable.FirstOrDefault(item => item.LessonNumber == lesson_number &&
-                                                                        item.TeacherId == teacher_id &&
-                                                                        item.Monday == true);
-                    break;
-            }
+            Timetable timetable = unitOfWork.Timetable.GetTimetableForTeacher(day, teacher_id, lesson_number);
 
             if (timetable == null) return null;
             return unitOfWork.TheClasses.GetTheClassById(timetable.ClassId);
@@ -240,8 +160,7 @@ namespace JournalForSchool.Database_Source
 
             var unitOfWork = UnitOfWork.GetInstance();
 
-            unitOfWork.Db.Timetable.Add(timetable);
-            unitOfWork.Db.SaveChanges();
+            unitOfWork.Timetable.Create(timetable);
         }
 
 

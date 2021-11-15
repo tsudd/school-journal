@@ -2,60 +2,57 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using DataAccessLayer.DataAccessModel;
 using DataAccessLayer.Models;
 
 namespace JournalForSchool
 {
     public class TeachersRepository : IRepository<Teacher>
     {
-        private Context db;
+        private readonly DataAccessTeachers dataAccess;
 
-        public TeachersRepository(Context context)
+        public TeachersRepository(AccessOrchestrator orchestrator = null)
         {
-            this.db = context;
+            if (orchestrator == null)
+            {
+                throw new ArgumentException();
+            }
+            dataAccess = orchestrator.GetModelAccess<Teacher>() as DataAccessTeachers;
         }
 
         public IEnumerable<Teacher> GetAll()
         {
-            return db.Teachers;
+            return dataAccess.GetAll();
         }
 
         public Teacher Get(int id)
         {
-            return db.Teachers.Find(id);
+            return dataAccess.Get(id);
         }
 
         public void Create(Teacher teacher)
         {
-            db.Teachers.Add(teacher);
+            dataAccess.Create(teacher);
         }
 
         public void Update(Teacher teacher)
         {
-            db.Entry(teacher).State = EntityState.Modified;
+            dataAccess.Update(teacher);
         }
 
         public void Delete(int id)
         {
-            Teacher teacher = db.Teachers.Find(id);
-            if (teacher != null)
-                db.Teachers.Remove(teacher);
+            dataAccess.Delete(id);
         }
 
         public List<string> GetAllTeachersNames()
         {
-            List<string> listNames = new List<string>();
-            UnitOfWork unitOfWork = UnitOfWork.GetInstance();
-            
-            var allTeachers = db.Teachers.ToList();
+            return dataAccess.GetAllTeachersNames();
+        }
 
-            foreach (var item in allTeachers)
-            {
-                var user = unitOfWork.Users.GetUserById(item.UserId);
-                listNames.Add(user.LastName + " " + user.FirstName + " " + user.MiddleName);
-            }
-
-            return listNames;
+        public Teacher GetTeacherByUserId(int id)
+        {
+            return dataAccess.GetTeacherByUserId(id);
         }
     }
 }

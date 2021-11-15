@@ -15,6 +15,7 @@ namespace DataAccessLayer.DataAccessModel
         public const string DELETE_PROC = "sp_DeleteClass";
         public const string GET_LETTERS_PROC = "sp_GetTheClassesLetters";
         public const string GET_CLASS_BY_NUMBER = "sp_GetTheClassByNumber";
+        public const string GET_CLASSES_NAMES_PROC = "sp_GetTheDisctinctClassesNames";
 
         public const string ID_ARGUMENT = "id";
         public const string USERID_ARGUMENT = "userId";
@@ -77,9 +78,13 @@ namespace DataAccessLayer.DataAccessModel
             Connection.ExecuteCommand<TheClasses>(UPDATE_PROC, parameters, false);
         }
 
-        public List<string> GetClassesLetters()
+        public List<string> GetClassesLetters(int num)
         {
-            var classes = Connection.ExecuteCommand<TheClasses>(GET_LETTERS_PROC);
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter(CLASS_ARGUMENT, num)
+            };
+            var classes = Connection.ExecuteCommand<TheClasses>(GET_LETTERS_PROC, parameters);
             var letters = new List<string>();
             foreach(var one in classes)
             {
@@ -92,7 +97,7 @@ namespace DataAccessLayer.DataAccessModel
         {
             var parameters = new List<SqlParameter>
             {
-                new SqlParameter(CHECKTABLE_ARGUMENT, item.TheClass),
+                new SqlParameter(CLASS_ARGUMENT, item.TheClass),
                 new SqlParameter(LETTER_ARGUMENT, item.ClassLetter)
             };
             var classes = Connection.ExecuteCommand<TheClasses>(GET_CLASS_BY_NUMBER, parameters);
@@ -101,6 +106,17 @@ namespace DataAccessLayer.DataAccessModel
                 return classes[0];
             }
             return null;
+        }
+
+        public List<int> GetDistinctClassesNames()
+        {
+            var classes = Connection.ExecuteCommand<TheClasses>(GET_CLASSES_NAMES_PROC);
+            var names = new List<int>();
+            foreach (var one in classes)
+            {
+                names.Add(one.TheClass);
+            }
+            return names;
         }
 
         //TODO: CLass by full name?

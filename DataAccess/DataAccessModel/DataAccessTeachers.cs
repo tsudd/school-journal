@@ -16,6 +16,7 @@ namespace DataAccessLayer.DataAccessModel
         public const string DELETE_PROC = "sp_DeleteTeacher";
         public const string GET_ALL_PROC = "sp_GetAllTeachers";
         public const string GET_BY_ID_PROC = "sp_GetTeacherById";
+        public const string GET_TEACHER_BY_USER_ID_PROC = "sp_GetTeacherByUserId";
 
         public const string ID_ARGUMENT = "id";
         public const string USER_ID_ARGUMENT = "userId";
@@ -91,6 +92,20 @@ namespace DataAccessLayer.DataAccessModel
                 response.Add(user.LastName + " " + user.FirstName + " " + user.MiddleName);
             }
             return response;
+        }
+
+        public Teacher GetTeacherByUserId(int id)
+        {
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter(USER_ID_ARGUMENT, id)
+            };
+            var teachers = Connection.ExecuteCommand<Teacher>(GET_TEACHER_BY_USER_ID_PROC, parameters);
+            if (teachers.Count > 0)
+            {
+                return teachers[0];
+            }
+            return null;
         }
         
     }

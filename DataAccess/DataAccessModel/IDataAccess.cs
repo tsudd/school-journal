@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace DataAccessLayer.DataAccessModel
 {
-    interface IDataAccess<T>
+    public interface IDataAccess<T>
     { 
         IEnumerable<T> GetAll();
         T Get(int id);

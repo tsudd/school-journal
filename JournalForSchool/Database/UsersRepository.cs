@@ -1,53 +1,52 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using DataAccessLayer.DataAccessModel;
 using DataAccessLayer.Models;
 namespace JournalForSchool
 {
     public class UsersRepository : IRepository<User>
     {
-        private UnitOfWork unitOfWork;
-        private Context Db;
+        private readonly DataAccessUsers dataAccess;
         
-        public UsersRepository()
+        public UsersRepository(AccessOrchestrator orchestrator = null)
         {
-            unitOfWork = UnitOfWork.GetInstance();
-            Db = unitOfWork.Db;
+            if (orchestrator == null)
+            {
+                throw new ArgumentException();
+            }
+            dataAccess = orchestrator.GetModelAccess<User>() as DataAccessUsers;
         }
 
         public IEnumerable<User> GetAll()
         {
-            return Db.Users;
+            return dataAccess.GetAll();
         }
 
         public User Get(int id)
         {
-            return Db.Users.Find(id);
+            return dataAccess.Get(id);
         }
 
         public void Create(User user)
         {
-            Db.Users.Add(user);
+            dataAccess.Create(user);
         }
 
         public void Update(User user)
         {
-            Db.Entry(user).State = EntityState.Modified;
+            dataAccess.Update(user);
         }
 
         public void Delete(int id)
         {
-            User user = Db.Users.Find(id);
-            if (user != null)
-                Db.Users.Remove(user);
+            dataAccess.Delete(id);
         }
 
         public bool IsLoginExist(User user)
         {
-            User findUser = Db.Users.FirstOrDefault(item => item.Login == user.Login);
-
-            if (findUser != null) return true;
-            return false;
+            return dataAccess.IsLoginExist(user);
         }
 
         public User GetUserByLoginAndPassword(string login, string password)
@@ -61,37 +60,38 @@ namespace JournalForSchool
             Db.SaveChanges();
             */
 
-            return UnitOfWork.GetInstance().Db.Users.FirstOrDefault(item => item.Login == login && item.Password == password);
+            return dataAccess.GetUserByLoginAndPassword(login, password);
         }
 
         public User GetUserByLogin(string login)
         {
-            return Db.Users.FirstOrDefault(item => item.Login == login);
+            return dataAccess.GetUserByLogin(login);
             
         }
 
         public List<User> GetAllUsersByClassId(int class_id)
         {
-            List<User> list = new List<User>();
-            list = Db.Users.Where(item => item.TheClassesId == class_id).OrderBy(item => item.LastName).ToList();
-            return list;
+            return dataAccess.GetAllUsersByClassId(class_id);
         }
 
         public User GetUserByName(string first_name, string last_name, string middle_name)
         {
-           return Db.Users.FirstOrDefault(item => item.FirstName == first_name &&
-                                                        item.LastName == last_name &&
-                                                        item.MiddleName == middle_name);
+            return dataAccess.GetUserByName(first_name, last_name, middle_name);
         }
 
         public User GetUserNameById(int user_id)
         {
-            return Db.Users.FirstOrDefault(item => item.Id == user_id);
+            return dataAccess.GetUserNameById(user_id);
         }
 
         public User GetUserById(int user_id)
         {
-            return Db.Users.FirstOrDefault(item => item.Id == user_id);
+            return GetUserById(user_id);
+        }
+
+        public List<User> GetPupils()
+        {
+            return dataAccess.GetPupils();
         }
     }
 }

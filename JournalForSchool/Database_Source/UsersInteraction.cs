@@ -22,8 +22,6 @@ namespace JournalForSchool.Database_Source
         {
             var unitOfWork = UnitOfWork.GetInstance();
             user.ImagePath = path;
-
-            unitOfWork.Db.SaveChanges();
         }
 
         public static List<StackPanel> GetStackPanelList(int class_id)

@@ -5,7 +5,6 @@ namespace JournalForSchool.Database_Source
 {
     public static class TeachersInteraction
     {
-        private static Context Db;
         public static void Insert_Teacher(User user, int subject_id)
         {
             var unitOfWork = UnitOfWork.GetInstance();
@@ -23,7 +22,7 @@ namespace JournalForSchool.Database_Source
         public static bool IsTeacher(User user)
         {
             var unitOfWork = UnitOfWork.GetInstance();
-            var teacher = unitOfWork.Db.Teachers.FirstOrDefault(item => item.UserId == user.Id);
+            var teacher = unitOfWork.Teachers.Get(user.Id);
 
             /*
             foreach (var item in unitOfWork.Db.Teachers.ToList())
@@ -43,16 +42,16 @@ namespace JournalForSchool.Database_Source
         public static Teacher GetTeacherModel(User user)
         {
             var unitOfWork = UnitOfWork.GetInstance();
-            return unitOfWork.Db.Teachers.FirstOrDefault(item => item.UserId == user.Id);
+            return unitOfWork.Teachers.GetTeacherByUserId(user.Id);
         }
 
         public static User GetUserIdByTeachedId(int teacher_id)
         {
             var unitOfWork = UnitOfWork.GetInstance();
 
-            var teacher_model = unitOfWork.Db.Teachers.FirstOrDefault(item => item.Id == teacher_id);
+            var teacher_model = unitOfWork.Teachers.Get(teacher_id);
 
-            return unitOfWork.Db.Users.FirstOrDefault(item => item.Id == teacher_model.UserId);            
+            return unitOfWork.Users.Get(teacher_model.Id);            
         }
     }
 }

@@ -15,6 +15,7 @@ namespace DataAccessLayer.DataAccessModel
         public const string GET_BY_LOGIN_PROC = "sp_GetUserByLogin";
         public const string GET_ALL_USERS_BY_CLASS_ID_PROC = "sp_GetAllUsersByClassId";
         public const string GET_BY_NAME = "sp_GetUserByName";
+        public const string GET_PUPILS_PROC = "sp_GetAllPupilsAndUpdate";
 
         public const string CREATE_USER = "sp_CreateUser";
         public const string UPDATE_PROC = "sp_UpdateUser";
@@ -205,5 +206,9 @@ namespace DataAccessLayer.DataAccessModel
             return Get(user_id);
         }
        
+        public List<User> GetPupils()
+        {
+            return Connection.ExecuteCommand<User>(GET_PUPILS_PROC);
+        }
     }
 }

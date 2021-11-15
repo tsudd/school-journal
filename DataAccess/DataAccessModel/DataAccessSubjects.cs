@@ -92,5 +92,17 @@ namespace DataAccessLayer.DataAccessModel
             }
             return -1;
         }
+
+        public List<string> GetSubjectNames()
+        {
+            var subjects = Connection.ExecuteCommand<Subjects>(GET_ALL_NAMES_PROC);
+            var names = new List<string>();
+            foreach(var s in subjects)
+            {
+                names.Add(s.SubjectName);
+            }
+            return names;
+        }
+
     }
 }

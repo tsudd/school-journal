@@ -58,15 +58,13 @@ namespace JournalForSchool.AdminPageFolder
 
         private void GetAllPupilsAndUpdate()
         {
-
-            listOfUsers = unitOfWork.Db.Users.Include(p => p.TheClasses).Where(p => p.TheClasses != null).ToList();
+            listOfUsers = unitOfWork.Users.GetPupils();
             g.ItemsSource = listOfUsers;
         }
 
         private void GetAllTeachersAndUpdate()
         {
-
-            listOfTeachers = unitOfWork.Db.Teachers.Include("User").Include(p => p.Subject).ToList();
+            listOfTeachers = unitOfWork.Teachers.GetAll().ToList();
             teachers.ItemsSource = listOfTeachers;
         }
 

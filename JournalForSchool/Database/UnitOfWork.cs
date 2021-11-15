@@ -10,8 +10,6 @@ namespace JournalForSchool
 {
     public class UnitOfWork : IDisposable
     {
-        public Context Db;
-
         private TeachersRepository teachersRepository;
         private SubjectsRepository subjectsRepository;
         private TheClassesRepository theClassesRepository;
@@ -21,10 +19,18 @@ namespace JournalForSchool
         private AdminsRepository adminsRepository;
 
         private static UnitOfWork instance;
+        private readonly AccessOrchestrator Orchestrator;
 
-        private UnitOfWork()
+        private UnitOfWork(AccessOrchestrator orchestrator = null)
         {
- 
+            if (orchestrator == null)
+            {
+                Orchestrator = new AccessOrchestrator();
+            }
+            else
+            {
+                Orchestrator = orchestrator;
+            }
         }
 
         public static UnitOfWork GetInstance()
@@ -32,7 +38,6 @@ namespace JournalForSchool
             if (instance == null)
             {
                 instance = new UnitOfWork();
-                instance.Db = Context.GetInstance();
             }
             return instance;
         }
@@ -42,7 +47,7 @@ namespace JournalForSchool
             get
             {
                 if (teachersRepository == null)
-                    teachersRepository = new TeachersRepository(Db);
+                    teachersRepository = new TeachersRepository(Orchestrator);
                 return teachersRepository;
             }
         }
@@ -52,7 +57,7 @@ namespace JournalForSchool
             get
             {
                 if (subjectsRepository == null)
-                    subjectsRepository = new SubjectsRepository();
+                    subjectsRepository = new SubjectsRepository(Orchestrator);
                 return subjectsRepository;
             }
         }
@@ -62,7 +67,7 @@ namespace JournalForSchool
             get
             {
                 if (theClassesRepository == null)
-                    theClassesRepository = new TheClassesRepository();
+                    theClassesRepository = new TheClassesRepository(Orchestrator);
                 return theClassesRepository;
             }
         }
@@ -72,7 +77,7 @@ namespace JournalForSchool
             get
             {
                 if (timetableRepository == null)
-                    timetableRepository = new TimetableRepository(Db);
+                    timetableRepository = new TimetableRepository(Orchestrator);
                 return timetableRepository;
             }
         }
@@ -82,7 +87,7 @@ namespace JournalForSchool
             get
             {
                 if (usersRepository == null)
-                    usersRepository = new UsersRepository();
+                    usersRepository = new UsersRepository(Orchestrator);
                 return usersRepository;
             }
         }
@@ -92,7 +97,7 @@ namespace JournalForSchool
             get
             {
                 if (marksRepository == null)
-                    marksRepository = new MarksRepository(Db);
+                    marksRepository = new MarksRepository(Orchestrator);
                 return marksRepository;
             }
         }
@@ -102,14 +107,14 @@ namespace JournalForSchool
             get
             {
                 if (adminsRepository == null)
-                    adminsRepository = new AdminsRepository(Db);
+                    adminsRepository = new AdminsRepository(Orchestrator);
                 return adminsRepository;
             }
         }
 
         public void Save()
         {
-            Db.SaveChanges();
+            //Db.SaveChanges();
         }
 
         private bool disposed = false;
@@ -120,7 +125,7 @@ namespace JournalForSchool
             {
                 if (disposing)
                 {
-                    Db.Dispose();
+                    //Db.Dispose();
                 }
                 this.disposed = true;
             }

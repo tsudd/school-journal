@@ -11,6 +11,18 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE dbo.sp_GetTimeTableModel
+	@lessonNumber int = NULL,
+	@subjectId int = NULL,
+	@classId int = NULL
+AS
+BEGIN
+	SELECT TOP 1 Timetables.*
+	FROM Timetables
+	WHERE SubjectId = @subjectId AND LessonNumber = @lessonNumber AND ClassId = @classId;
+END
+GO
+
 -- 2) GetAdminByUserId.
 CREATE PROCEDURE dbo.sp_GetAdminByUserId
 	@userId	int = NULL
@@ -54,6 +66,36 @@ BEGIN
 				ELSE
 					IF @day = 'Friday'
 						SELECT TOP 1 Timetables.* FROM Timetables where ClassId = @classId and LessonNumber = @lessonNumber and Friday = 1;	
+					ELSE 
+						BEGIN						
+						DECLARE @MessageText_AdditionalProc_545 NVARCHAR(4000)	= N'Fail. GetTimetableForUser , cuz @day = %s invalid.';
+						-- RAISERROR with severity 11-19 will cause execution to 
+						-- jump to the CATCH block.
+						RAISERROR (@MessageText_AdditionalProc_545, 16, 1, @day);			
+						END
+END
+GO
+
+CREATE PROCEDURE dbo.sp_GetTimetableForTeacher
+	@day		nvarchar(50)	= 'Monday',
+	@teacherId	int				= NULL,
+	@lessonNumber int			= NULL
+AS
+BEGIN
+	IF @day = 'Monday'
+		SELECT TOP 1 Timetables.* FROM Timetables where TeacherId = @teacherId and LessonNumber = @lessonNumber and Monday = 1;
+	ELSE
+		IF @day = 'Tuesday'
+			SELECT TOP 1 Timetables.* FROM Timetables where TeacherId = @teacherId and LessonNumber = @lessonNumber and Tuesday = 1;
+		ELSE
+			IF @day = 'Wednesday'
+				SELECT TOP 1 Timetables.* FROM Timetables where TeacherId = @teacherId and LessonNumber = @lessonNumber and Wednesday = 1;
+			ELSE
+				IF @day = 'Thursday'
+					SELECT TOP 1 Timetables.* FROM Timetables where TeacherId = @teacherId and LessonNumber = @lessonNumber and Thursday = 1;
+				ELSE
+					IF @day = 'Friday'
+						SELECT TOP 1 Timetables.* FROM Timetables where TeacherId = @teacherId and LessonNumber = @lessonNumber and Friday = 1;	
 					ELSE 
 						BEGIN						
 						DECLARE @MessageText_AdditionalProc_545 NVARCHAR(4000)	= N'Fail. GetTimetableForUser , cuz @day = %s invalid.';

@@ -8,8 +8,8 @@ namespace JournalForSchool.Database_Source
         private static UnitOfWork unitOfWork = UnitOfWork.GetInstance();
         public static bool IsAdmin(User user)
         {
-            
-            var admin = unitOfWork.Db.Admins.FirstOrDefault(item => item.UserId == user.Id);
+
+            var admin = unitOfWork.Admins.GetAdminByUserId(user.Id);
 
             if (admin == null) return false;
             else return true;

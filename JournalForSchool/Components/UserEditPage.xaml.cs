@@ -61,7 +61,6 @@ namespace JournalForSchool.Components
             }
 
             unitOfWork.Users.Update(user);
-            unitOfWork.Db.SaveChanges();
 
             mainWindow.Navigation.Navigate(new UserPage(mainWindow, user));
         }

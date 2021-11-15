@@ -178,6 +178,7 @@
     <Compile Include="Components\UserEditPage.xaml.cs">
       <DependentUpon>UserEditPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Database\AccessOrchestrator.cs" />
     <Compile Include="Database_Source\AdminsInteraction.cs" />
     <Compile Include="Database_Source\MarksInteraction.cs" />
     <Compile Include="JournalForSchoolDataSet.Designer.cs">
@@ -222,7 +223,6 @@
     <Compile Include="Components\SubjectMarks.xaml.cs">
       <DependentUpon>SubjectMarks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Context.cs" />
     <Page Include="AdminPageFolder\AdminAddClassWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

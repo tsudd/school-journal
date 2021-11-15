@@ -2,66 +2,57 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using DataAccessLayer.DataAccessModel;
 using DataAccessLayer.Models;
 
 namespace JournalForSchool.Repositories
 {
     public class MarksRepository : IRepository<Mark>
     {
-        private Context db;
+        private readonly DataAccessMarks dataAccess;
 
-        public MarksRepository(Context context)
+        public MarksRepository(AccessOrchestrator orchestrator = null)
         {
-            this.db = context;
+            if (orchestrator == null)
+            {
+                throw new ArgumentException();
+            }
+            dataAccess = orchestrator.GetModelAccess<Mark>() as DataAccessMarks;
         }
 
         public IEnumerable<Mark> GetAll()
         {
-            return db.Marks;
+            return dataAccess.GetAll();
         }
 
         public Mark Get(int id)
         {
-            return db.Marks.Find(id);
+            return dataAccess.Get(id);
         }
 
         public void Create(Mark mark)
         {
-            db.Marks.Add(mark);
+            dataAccess.Create(mark);
         }
 
         public void Update(Mark mark)
         {
-            db.Entry(mark).State = EntityState.Modified;
+            dataAccess.Update(mark);
         }
 
         public void Delete(int id)
         {
-            Mark mark = db.Marks.Find(id);
-            if (mark != null)
-                db.Marks.Remove(mark);
+            dataAccess.Delete(id);
         }
         
         public int GetMarkSelectedIndex(int User_id, int TimeTable_id, string Date)
         {
-            var markModel = db.Marks.FirstOrDefault(item => item.UserId == User_id &&
-                                                           item.TimeTableId == TimeTable_id &&
-                                                           item.Date == Date);
-
-            if (markModel == null) return -1;
-            else return markModel.SelectedIndex;
+            return dataAccess.GetMarkSelectedIndex(User_id, TimeTable_id, Date);
         }
 
         public void DeleteIfExist(int User_id, int TimeTable_id, string Date)
         {
-            var markModel = db.Marks.FirstOrDefault(item => item.UserId == User_id &&
-                                                           item.TimeTableId == TimeTable_id &&
-                                                           item.Date == Date);
-            if (markModel != null)
-            {
-                db.Marks.Remove(markModel);
-                db.SaveChanges();
-            }
+            dataAccess.DeleteIfExists(User_id, TimeTable_id, Date);
         }
 
 
@@ -75,8 +66,7 @@ namespace JournalForSchool.Repositories
                 SelectedIndex = Selected_index
             };
 
-            db.Marks.Add(markModel);
-            db.SaveChanges();
+            Create(markModel);
         }
     }
 }
